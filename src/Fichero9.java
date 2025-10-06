@@ -64,6 +64,7 @@ public class Fichero9 {
         }
     }
     public static void explorarCarpeta(){
+        System.out.println("EXPLORAR ARCHIVO");
 
     }
     public static void crearCarpeta(){
