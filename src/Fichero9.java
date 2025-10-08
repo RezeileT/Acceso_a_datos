@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class Fichero9 {
@@ -53,9 +54,9 @@ public class Fichero9 {
         System.out.print("Introduce el nombre del directorio: ");
         input = sc.next();
         System.out.print("Introduce el nombre del archivo: ");
-        input = sc.next();
+        String archivo = sc.next();
 
-        file = new File(input +"/"+input);
+        file = new File(input +"/"+archivo);
 
         if(file.exists()){
             System.out.println("El archivo existe en " + file.getAbsolutePath());
@@ -159,26 +160,30 @@ public class Fichero9 {
         }while(opcion != 3);
     }
     public static void verificarURI(){
-        System.out.print("Introduce una URI (ejemplo: file///C:ruta/archivo.txt): ");
+        System.out.print("Introduce una URI (ejemplo: file:///C:ruta/archivo.txt): ");
         input = sc.next();
 
-        file = new File(input);
-
-        URI uri = file.toURI();
-
-        if (file.exists()) {
-            if (file.isDirectory()) {
-                System.out.println("La ruta corresponde a un directorio en: " + uri);
-            } else if (file.isFile()) {
-                System.out.println("La ruta corresponde a un archivo en: " + uri);
+        try{
+            URI uri = new URI(input);
+            File file = new File(uri);
+            if (file.exists()) {
+                if (file.isDirectory()) {
+                    System.out.println("La ruta corresponde a un directorio en: " + uri);
+                } else if (file.isFile()) {
+                    System.out.println("La ruta corresponde a un archivo en: " + uri);
+                }
+            } else {
+                System.out.println("La URI no existe.");
             }
-        } else {
-            System.out.println("La URI no existe.");
+
+        }catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
+
     }
 
     public static void convertirURI(){
-        System.out.println("Introduce la ruta a convertir: ");
+        System.out.print("Introduce la ruta a convertir: ");
         input = sc.next();
 
         file = new File(input);
