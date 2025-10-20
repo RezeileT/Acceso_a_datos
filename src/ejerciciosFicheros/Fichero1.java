@@ -1,3 +1,5 @@
+package ejerciciosFicheros;
+
 import java.io.File;
 
 public class Fichero1 {

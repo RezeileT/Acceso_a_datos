@@ -1,6 +1,7 @@
+package ejerciciosFicheros;
+
 import java.io.File;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class Fichero8 {
