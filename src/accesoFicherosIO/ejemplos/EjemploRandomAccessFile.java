@@ -5,7 +5,7 @@ import java.io.RandomAccessFile;
 
 public class EjemploRandomAccessFile {
     public static void main(String[] args) {
-        try(RandomAccessFile raf = new RandomAccessFile("src/accesoFicherosIO/ejemplos/datos.bin","rw")){
+        try(RandomAccessFile raf = new RandomAccessFile("src/accesoFicherosIO/resources/datos.bin","rw")){
             raf.writeBytes("Inicio");
             raf.seek(20);
             raf.writeBytes("Medio");

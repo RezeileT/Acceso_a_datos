@@ -1,0 +1,4 @@
+Número de lineas: 3
+Número palabras: 6
+NÚmero de caracteres: 33
+Palabra más larga: Programación

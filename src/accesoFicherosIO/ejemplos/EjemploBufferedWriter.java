@@ -12,7 +12,7 @@ public class EjemploBufferedWriter {
           "Segunda linea",
           "Tercera linea",
         };
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter("src/accesoFicherosIO/ejemplos/salida_buffer.txt"))){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("src/accesoFicherosIO/resources/salida_buffer.txt"))){
             for(String linea : lineas){
                 bw.write(linea);
                 bw.newLine();

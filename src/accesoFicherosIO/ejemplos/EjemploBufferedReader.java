@@ -9,7 +9,7 @@ public class EjemploBufferedReader {
         String linea;
         int numLinea = 1;
 
-        try(BufferedReader br = new BufferedReader(new FileReader("src/accesoFicherosIO/ejemplos/entrada.txt"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("src/accesoFicherosIO/resources/entrada.txt"))){
             while ((linea = br.readLine()) != null){
                 System.out.println(linea + numLinea);
                 numLinea++;

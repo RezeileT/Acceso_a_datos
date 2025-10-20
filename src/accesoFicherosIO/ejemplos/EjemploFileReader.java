@@ -7,7 +7,7 @@ public class EjemploFileReader {
     public static void main(String[] args) {
         int caracter;
 
-        try (FileReader fr = new FileReader("src/accesoFicherosIO/ejemplos/entrada.txt")) {
+        try (FileReader fr = new FileReader("src/accesoFicherosIO/resources/entrada.txt")) {
             while ((caracter = fr.read()) != -1) {
                 System.out.print((char) caracter);
             }
