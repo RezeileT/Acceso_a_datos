@@ -21,6 +21,7 @@ public class EjemploRandomAccessFile {
             raf.seek(40);
             System.out.println("Posicion 40 : " + raf.readLine());
 
+            //.length muestra el tamaño del archivo en bytes
             System.out.println("Tamaño del archivo : " + raf.length() + " bytes");
         }catch (IOException e){
             System.err.println("Error al acceder el archivo " + e.getMessage());
