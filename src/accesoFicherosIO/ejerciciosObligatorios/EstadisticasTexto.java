@@ -1,11 +1,11 @@
 package accesoFicherosIO.ejerciciosObligatorios;
-/**
+/*
  * Lee un archivo y cuenta palabras, líneas y caracteres
  * @param nombreArchivo ruta del archivo a analizar
  * @return objeto EstadisticasTexto con los resultados
  * @throws IOException si hay error al leer el archivo
  */
-/**
+/*
  * Escribe las estadísticas en un archivo de salida
  * @param estadisticas objeto con las estadísticas
  * @param archivoSalida ruta donde guardar el resultado
