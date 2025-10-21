@@ -19,7 +19,7 @@ import java.io.*;
 public class MergeFiltrado {
     private static String[] archivoEntrada;
     private static String archivoSalida = "combinado.txt";
-    private static final String FILTRO = "Java";
+    private static final String FILTRO = "Java ";
     private static int numLineasEscritas = 0;
 
     public static int combinarArchivos(String[] archivosEntrada, String archivoSalida, String filtro) throws IOException {
@@ -32,13 +32,11 @@ public class MergeFiltrado {
                 String ruta = directorio + File.separator + archivoEntrada[i];
                 System.out.println("Procesando: " + archivoEntrada[i]);
                 BufferedReader br = new BufferedReader(new FileReader(ruta));
-                while (br.readLine() != null) {
-                    String linea = br.readLine();
-                    if (linea != null) {
-                        if (cumpleFiltro(linea, filtro)) {
-                            textoEscrito.append(linea).append("\n");
-                            numLineasEscritas++;
-                        }
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    if (cumpleFiltro(linea, filtro)) {
+                        textoEscrito.append(linea).append("\n");
+                        numLineasEscritas++;
                     }
                 }
                 br.close();
@@ -47,13 +45,13 @@ public class MergeFiltrado {
         } else {
             System.out.println("La siguiente ruta no es un directorio o no existe");
         }
-        escribirArchivo(textoEscrito.toString(), archivoSalida);
+        escribirArchivo(textoEscrito.toString(), directorio, archivoSalida);
 
         return numLineasEscritas;
     }
-    public static void escribirArchivo(String textoEscrito, String archivoSalida) throws IOException {
+    public static void escribirArchivo(String textoEscrito, File ruta, String archivoSalida) throws IOException {
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter(archivoSalida));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + File.separator +archivoSalida));
         bw.write(textoEscrito);
         bw.close();
 
@@ -64,7 +62,7 @@ public class MergeFiltrado {
         String[] palabras = linea.split(" ");
         boolean resultado = false;
         for (String palabra : palabras) {
-            if (palabra.toLowerCase().contains(filtro.toLowerCase())) {
+            if (palabra.toLowerCase().contentEquals(filtro.toLowerCase().trim())) {
                 resultado = true;
             }
         }
