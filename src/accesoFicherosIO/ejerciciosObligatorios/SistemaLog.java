@@ -10,7 +10,7 @@ public class SistemaLog {
     private String archivoLog;
     private long tamanoMaximo;
     private int numeroRotacion;
-    String ruta = "src/accesoFicherosIO/resourcesApp";
+    String ruta = "src/accesoFicherosIO/resources/app";
 
     public SistemaLog(String archivoLog, long tamanoMaximo) {
         this.archivoLog = archivoLog;

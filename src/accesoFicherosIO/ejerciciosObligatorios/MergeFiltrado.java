@@ -24,7 +24,7 @@ public class MergeFiltrado {
     private static String textoEscrito = " ";
 
     public static int combinarArchivos(String[] archivosEntrada, String archivoSalida, String filtro) throws IOException {
-        File directorio = new File("src/accesoFicherosIO/resourcesFiltro");
+        File directorio = new File("src/accesoFicherosIO/resources/filtro");
         ;
         //Comprobamos si el archivo existe y de si es un directorio
         if (directorio.exists() && directorio.isDirectory()) {
