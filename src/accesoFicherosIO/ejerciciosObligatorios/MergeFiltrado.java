@@ -18,42 +18,44 @@ import java.io.*;
  */
 public class MergeFiltrado {
     private static String[] archivoEntrada;
-    private static String archivoSalida = "combinado.txt";
+    private static final String archivoSalida = "combinado.txt";
     private static final String FILTRO = "Java ";
     private static int numLineasEscritas = 0;
+    private static String textoEscrito = " ";
 
     public static int combinarArchivos(String[] archivosEntrada, String archivoSalida, String filtro) throws IOException {
         File directorio = new File("src/accesoFicherosIO/resourcesFiltro");
-        StringBuilder textoEscrito = new StringBuilder();
+        ;
         //Comprobamos si el archivo existe y de si es un directorio
         if (directorio.exists() && directorio.isDirectory()) {
-            archivoEntrada = directorio.list();
-            for (int i = 0; i < archivoEntrada.length; i++) {
-                String ruta = directorio + File.separator + archivoEntrada[i];
-                System.out.println("Procesando: " + archivoEntrada[i]);
+            archivosEntrada = directorio.list();
+            for (int i = 0; i < archivosEntrada.length; i++) {
+                String ruta = directorio + File.separator + archivosEntrada[i];
+                System.out.println("Procesando: " + archivosEntrada[i]);
                 BufferedReader br = new BufferedReader(new FileReader(ruta));
                 String linea;
                 while ((linea = br.readLine()) != null) {
                     if (cumpleFiltro(linea, filtro)) {
-                        textoEscrito.append(linea).append("\n");
+                        textoEscrito = textoEscrito + linea + "\n";
                         numLineasEscritas++;
                     }
                 }
                 br.close();
-
             }
         } else {
             System.out.println("La siguiente ruta no es un directorio o no existe");
         }
-        escribirArchivo(textoEscrito.toString(), directorio, archivoSalida);
+        escribirArchivo(textoEscrito, "src/accesoFicherosIO/resources", archivoSalida);
 
         return numLineasEscritas;
     }
-    public static void escribirArchivo(String textoEscrito, File ruta, String archivoSalida) throws IOException {
+    public static void escribirArchivo(String textoEscrito, String ruta, String archivoSalida) {
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + File.separator +archivoSalida));
-        bw.write(textoEscrito);
-        bw.close();
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + File.separator + archivoSalida))) {
+            bw.write(textoEscrito);
+        }catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
 
     }
 
