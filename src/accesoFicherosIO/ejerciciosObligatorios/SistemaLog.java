@@ -18,14 +18,6 @@ public class SistemaLog {
         this.numeroRotacion = 1;
     }
 
-    public long getTamanoMaximo() {
-        return this.tamanoMaximo;
-    }
-
-    public void setTamanoMaximo(long tamanoMaximo) {
-        this.tamanoMaximo = tamanoMaximo;
-    }
-
     enum NivelLog{
         INFO,
         WARNING,
