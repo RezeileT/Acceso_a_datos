@@ -44,9 +44,9 @@ public class ParseJSON {
         bw.write("{\n");
         for (int i = 0; i < datos.size(); i++) {
             if (i < datos.size() - 1) {
-                bw.write("\"" + datos.keySet().toArray()[i] + "\" " + ": " + " \"" + datos.values().toArray()[i] + "\",");
+                bw.write("\"" + datos.keySet().toArray()[i] + "\" " + ":" + " \"" + datos.values().toArray()[i] + "\",");
             }else
-                bw.write("\"" + datos.keySet().toArray()[i] + "\" " + ": " + " \"" + datos.values().toArray()[i] + "\"");
+                bw.write("\"" + datos.keySet().toArray()[i] + "\" " + ":" + " \"" + datos.values().toArray()[i] + "\"");
             bw.newLine();
         }
         bw.write("}");
