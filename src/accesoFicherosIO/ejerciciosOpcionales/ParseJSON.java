@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
- * Lee un archivo JSON y extrae pares clave-valor simples
+ * Lee un archivo JSON y extrae pares clave valor simples
  * @param archivoJson ruta del archivo JSON
  * @return Map con las claves y valores parseados
  * @throws IOException si hay error de lectura
@@ -28,7 +28,9 @@ public class ParseJSON {
         while ((linea = br.readLine()) != null) {
             if (linea.contains(":")) {
                 String[] partes = linea.split(":");
-                mapa.put(partes[0].trim(), partes[1].trim());
+                String clave = partes[0].trim().replace("\"", "").replace(",", "");
+                String valor = partes[1].trim().replace("\"", "").replace(",", "");
+                mapa.put(clave, valor);
                 contadorLineas++;
             }
         }
@@ -39,9 +41,12 @@ public class ParseJSON {
 
     public static void escribirJsonSimple(Map<String, String> datos, String archivoJson) throws IOException{
         BufferedWriter bw = new BufferedWriter(new FileWriter("src/accesoFicherosIO/resources/json" + File.separator +archivoJson));
-        bw.write("{");
+        bw.write("{\n");
         for (int i = 0; i < datos.size(); i++) {
-            bw.write(datos.keySet().toArray()[i] + ": " + datos.values().toArray()[i]);
+            if (i < datos.size() - 1) {
+                bw.write("\"" + datos.keySet().toArray()[i] + "\" " + ": " + " \"" + datos.values().toArray()[i] + "\",");
+            }else
+                bw.write("\"" + datos.keySet().toArray()[i] + "\" " + ": " + " \"" + datos.values().toArray()[i] + "\"");
             bw.newLine();
         }
         bw.write("}");

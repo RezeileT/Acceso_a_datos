@@ -1,5 +1,6 @@
-{"debug": "true"
-"host": "localhost",
-version: 1.0
-"puerto": "8080",
+{
+"puerto" :  "8080",
+"debug" :  "true",
+"host" :  "localhost",
+"version" :  "1.0"
 }
