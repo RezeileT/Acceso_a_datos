@@ -7,6 +7,7 @@ public class BackupIncremental {
     public static int backupIncremental(String carpetaOrigen, String carpetaDestino, String archivoControl) throws IOException{
         System.out.println("Iniciando backup");
 
+        File archivoControlCreado = new File(archivoControl);
         File directorioOrigen = new File(carpetaOrigen);
         File directorioDestino = new File(carpetaDestino);
         int numeroArchivos = 0;
@@ -15,6 +16,7 @@ public class BackupIncremental {
 
         if(datosControl == 0){
             System.out.println("Último backup: nunca");
+            archivoControlCreado.createNewFile();
         }else{
             System.out.println("Último backup: " + datosControl);
         }
@@ -59,7 +61,7 @@ public class BackupIncremental {
         }
         br.close();
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter(destino));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(destino.getAbsolutePath()+ File.separator + archivo.getName()));
         bw.write(texto);
         bw.close();
         System.out.println("Archivo copiado correctamente");
