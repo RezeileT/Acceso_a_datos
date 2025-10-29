@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Fichero7 {
+public class Biblioteca {
     private static Scanner sc = new Scanner(System.in);
 
     private static String categoria = "";

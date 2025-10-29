@@ -2,7 +2,7 @@ package ejerciciosFicheros;
 
 import java.io.File;
 
-public class Fichero2 {
+public class VerificarSiArchivoDirectorio {
     public static void main(String[] args) {
         // Directorio padre que acabamos de crear en documentos
         File ruta = new File("C:\\Users\\AlumnoAfternoon\\Documents\\PruebasJava");

@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class Fichero3 {
+public class VerificarURI {
     // Una ruta con URI, crear el objeto, verificar que existe(else if), si es un directorio o un archivo(else if)(try catch)
     public static void main(String[] args) {
         // Utilizamos un try catch porque el objeto URI tiende a dar errores

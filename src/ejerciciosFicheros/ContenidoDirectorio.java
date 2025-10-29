@@ -2,7 +2,7 @@ package ejerciciosFicheros;
 
 import java.io.File;
 
-public class Fichero4 {
+public class ContenidoDirectorio {
     // Copia exacta del Fichero 1, pero mostando dentro del if el contenido de la carpeta, sus nombres (list(), length())
     public static void main(String[] args) {
         //Ruta del directorio como cadena de texto

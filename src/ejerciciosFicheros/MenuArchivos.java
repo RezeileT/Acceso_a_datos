@@ -6,7 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Scanner;
 
-public class Fichero9 {
+public class MenuArchivos {
     private static Scanner sc = new Scanner(System.in);
     private static String input = null;
     private static File file = null;

@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URI;
 import java.util.Scanner;
 
-public class Fichero8 {
+public class ExploradorCarpetas {
     private static Scanner sc = new Scanner(System.in);
     private static String carpeta;
 

@@ -3,7 +3,7 @@ package ejerciciosFicheros;
 import java.io.File;
 import java.io.IOException;
 
-public class Fichero5 {
+public class CrearDirectorioArchivo {
     //Verificar que dicho directorio(s) o archivo existe, en caso de que no exista crearlo
     public static void main(String[] args) throws IOException {
         // Rutas de archivo y directorio como cadena de texto
