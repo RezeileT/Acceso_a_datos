@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 class Usuario {
     private int id;
     private String nombre;
@@ -46,32 +45,40 @@ class Usuario {
 
 public class UsuariosJDBC {
 
-    private static Statement sentencias;
-    private static ResultSet resultados;
+    private static Statement sentencia;
+    private static ResultSet resultado;
     private static Connection conexion = null;
 
     public static void crearTabla(Connection conn) throws SQLException {
-        conn.createStatement().executeQuery("CREATE TABLE IF NOT EXISTS usuarios (" +
-                "id int PRIMARY KEY AUTOINCREMENT," +
+        conn.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS usuarios (" +
+                "id int PRIMARY KEY AUTO_INCREMENT," +
                 "nombre varchar(100) NOT NULL," +
                 "email varchar(100) NOT NULL," +
-                "edad int);)");
+                "edad int)");
+        System.out.println("Tabla usuarios creada");
     }
 
     public static int insertarUsuario(Connection conn, String nombre, String email, int edad) throws SQLException{
-        resultados = conn.createStatement().executeQuery("SELECT id FROM usuarios WHERE email='"+email+"'");
-        return resultados.getInt("id");
+        String sql = "INSERT INTO usuarios (nombre, email, edad) VALUES (?, ?, ?)";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, nombre);
+        pstmt.setString(2, email);
+        pstmt.setInt(3, edad);
+
+        int filasAfectadas = pstmt.executeUpdate();
+        System.out.println("Usuario insertado: " + nombre);
+        return filasAfectadas;
     }
 
     public static List<Usuario> buscarPorNombre(Connection conn, String nombre) throws SQLException{
         List<Usuario> usuarios = new ArrayList<>();
-        ResultSet rs =  conn.createStatement().executeQuery("SELECT * FROM usuarios WHERE nombre='"+nombre+"'");
-        while(rs.next()){
+        resultado =  conn.createStatement().executeQuery("SELECT * FROM usuarios WHERE nombre='"+nombre+"'");
+        while(resultado.next()){
             Usuario usuario = new Usuario();
-            usuario.setId(rs.getInt("id"));
-            usuario.setNombre(rs.getString("nombre"));
-            usuario.setEmail(rs.getString("email"));
-            usuario.setEdad(rs.getInt("edad"));
+            usuario.setId(resultado.getInt("id"));
+            usuario.setNombre(resultado.getString("nombre"));
+            usuario.setEmail(resultado.getString("email"));
+            usuario.setEdad(resultado.getInt("edad"));
             usuarios.add(usuario);
         }
         return usuarios;
@@ -79,14 +86,13 @@ public class UsuariosJDBC {
 
     public static boolean actualizarEmail(Connection conn, int id, String nuevoEmail) throws SQLException{
         String query = "UPDATE usuarios SET email='"+nuevoEmail+"' WHERE id="+id;
-        sentencias = conn.createStatement();
-        resultados = sentencias.executeQuery(query);
-        return resultados.rowUpdated();
+        sentencia = conn.createStatement();
+        int filasAfectadas = sentencia.executeUpdate(query);
+        return filasAfectadas > 0;
     }
 
     public static boolean eliminarUsuario(Connection conn, int id) throws SQLException{
-        resultados = conn.createStatement().executeQuery("DELETE FROM usuarios WHERE id="+id);
-        return resultados.rowDeleted();
+        return conn.createStatement().executeUpdate("DELETE FROM usuarios WHERE id="+id) > 0;
     }
 
     static void main(String[] args) {
