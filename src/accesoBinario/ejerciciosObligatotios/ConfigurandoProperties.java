@@ -43,6 +43,8 @@ public class ConfigurandoProperties {
             config.setProperty("ui.tema", "oscuro");
             config.setProperty("db.port", "3307");
             guardarConfiguracion(config, ruta + File.separator + "app.properties", "Configuración de Mi Aplicación");
+            System.out.println("=== Configuración Cambiada ===");
+            mostrarConfiguracion(config);
         }catch (IOException e){
             System.err.println("Error: " + e.getMessage());
         }
