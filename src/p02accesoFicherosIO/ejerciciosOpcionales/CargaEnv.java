@@ -43,7 +43,7 @@ public class CargaEnv {
         return env.getOrDefault(clave, valorPorDefecto);
     }
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         try {
             env = cargarEnv("src/accesoFicherosIO/resources/env/.env");
             System.out.println("Base de datos: " + env.get("DB_HOST") + ":" + env.get("DB_PORT"));
