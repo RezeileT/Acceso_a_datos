@@ -1,21 +1,8 @@
 package p02accesoFicherosIO.ejerciciosObligatorios;
-/*
- * Lee un archivo y cuenta palabras, líneas y caracteres
- * @param nombreArchivo ruta del archivo a analizar
- * @return objeto EstadisticasTexto con los resultados
- * @throws IOException si hay error al leer el archivo
- */
-/*
- * Escribe las estadísticas en un archivo de salida
- * @param estadisticas objeto con las estadísticas
- * @param archivoSalida ruta donde guardar el resultado
- * @throws IOException si hay error al escribir
- */
 
-//Importamos las librerias IO
 import java.io.*;
 
-//Creamos una clase para guardar los datos de los archivos leidos
+//Creamos una clase para guardar los datos de los archivos leídos
 public class EstadisticasTexto {
     private int numeroLineas;
     private int numeroPalabras;
@@ -30,7 +17,7 @@ public class EstadisticasTexto {
         this.palabraMasLarga = palabraMasLarga;
     }
 
-    //Creamos un toString para escribir las estadisticas sin llamar a su get
+    //Creamos un toString para escribir las estadisticas sin llamar a los getters
     @Override
     public String toString() {
         return "Número de lineas: " + numeroLineas +
@@ -44,68 +31,75 @@ public class EstadisticasTexto {
 
         //No hace falta crear un File, es para comprobar que exista
         File archivo = new File(ruta);
+        //Variable para guardar las líneas del archivo
         String linea;
+        //Total de líneas del archivo
         int numLinea = 0;
+        //Total de palabras del archivo
         int numPalabras = 0;
+        //Total de caracteres del archivo
         int numCaracteres = 0;
+        //Guardará la palabra más larga
         String palabraMasLarga = "";
 
         BufferedReader br = new BufferedReader(new FileReader(ruta));
-            //Comprobamos si el archivo existe
-            if(archivo.exists()) {
-                while ((linea = br.readLine()) != null) {
-                    //Dividimos las líneas en palabras con .split() y las metemos en un array de Strings
-                    String[] palabras = linea.split(" ");
-                    //Contamos cuantas palabras hay en cada línea
-                    for(String palabra : palabras){
-                        //Contamos los caracteres de cada palabra (convertimos las palabras en un array de caracteres
-                        for (char caracter : palabra.toCharArray()) {
-                            if (caracter != ' ') {
-                                numCaracteres++;
-                            }
-                        }
-                        numPalabras++;
-                        //Vemos si la longitud de la palabra es mas larga que la anterior
-                        if (palabraMasLarga.length() < palabra.length()) {
-                            palabraMasLarga = palabra;
-                        }
-                    }
-                    numLinea++;
+        //Comprobamos si el archivo existe
+        if (!archivo.exists()) {
+            System.out.println("El archivo no existe");
+            return new EstadisticasTexto(0, 0, 0, "");
+        }
+
+        while ((linea = br.readLine()) != null) {
+            //Dividimos las líneas en palabras con .split() y las metemos en un array de Strings
+            String[] palabras = linea.split(" ");
+            //Contamos cuantas palabras hay en cada línea
+            for (String palabra : palabras) {
+                //Contamos el total de caracteres
+                numCaracteres += contarCaracteres(palabra);
+                //Contamos el total de palabras
+                numPalabras++;
+                //Vemos si la longitud de la palabra es mas larga que la anterior
+                if (palabraMasLarga.length() < palabra.length()) {
+                    palabraMasLarga = palabra;
                 }
-            }else{
-                System.out.println("El archivo no existe");
             }
-
+            //Contamos el total de líneas
+            numLinea++;
+        }
+        //No utilizo un try para cerrar el buffer para evitar anidar mucho el código
+        br.close();
+        //Creamos un objeto EstadisticasTexto y se lo pasamos a escribirEstadisticas para guardarlo en un archivo txt
         EstadisticasTexto et = new EstadisticasTexto(numLinea, numPalabras, numCaracteres, palabraMasLarga);
-
-        escribirEstadisticas(et, "src/accesoFicherosIO/resources/estadisticas.txt");
+        escribirEstadisticas(et, "src/p02accesoFicherosIO/resources/estadisticas.txt");
         return et;
+    }
+
+    //Metodo con el que contamos los caracteres de cada palabra (convertimos las palabras en un array de caracteres)
+    public static int contarCaracteres(String palabra) {
+        int caracteres = 0;
+        for (char caracter : palabra.toCharArray()) {
+            if (caracter != ' ') {
+                caracteres++;
+            }
+        }
+        return caracteres;
     }
 
     //Función para escribir un archivo con las estadisticas de otro archivo
     public static void escribirEstadisticas(EstadisticasTexto estadisticas, String archivoSalida) throws IOException {
-
-        BufferedWriter bw = new BufferedWriter(new FileWriter(archivoSalida));
-        bw.write(estadisticas.toString());
-
-        // No hace falta utilizar los getter si tenemos un to String personalizado
-        /*
-        bw.write(estadisticas.getNumeroLineas());
-        bw.write(estadisticas.getNumeroPalabras());
-        bw.write(estadisticas.getNumeroCaracteres());
-        bw.write(estadisticas.getPalabraMasLarga());
-         */
-
-        bw.close();
-
+        //Utilizamos el try para cerrar automáticamente el buffer
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(archivoSalida))){
+            bw.write(estadisticas.toString());
+        }
     }
 
     public static void main(String[] args) {
         System.out.println("***Estadisticas de archivo***");
+
         //El try debería recibir los throws IOException de analizarArchivo y scribirEstadisticas
         try {
-            System.out.println(analizarArchivo("src\\accesoFicherosIO\\resources\\archivo.txt"));
-        }catch (IOException e){
+            System.out.println(analizarArchivo("src\\p02accesoFicherosIO\\resources\\archivo.txt"));
+        } catch (IOException e) {
             System.err.println("Error al escribir o leer el archivo " + e.getMessage());
         }
     }
