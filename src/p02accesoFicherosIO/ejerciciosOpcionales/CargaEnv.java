@@ -6,31 +6,24 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * Lee un archivo .env y carga las variables
- * @param archivoEnv ruta del archivo .env
- * @return Map con las variables cargadas
- * @throws IOException si hay error de lectura
- */
-/*
- * Obtiene el valor de una variable de entorno
- * @param clave nombre de la variable
- * @param valorPorDefecto valor si la variable no existe
- * @return valor de la variable o valorPorDefecto
- */
-
 public class CargaEnv {
+    //Cuenta las variables en el archivo
     private static int contadorVariables = 0;
+    //Guarda las variables y sus valores
     private static Map<String, String> env;
 
+    //Metodo que lee el archivo .env y devuelve las variables sy valores
     public static Map<String, String> cargarEnv(String archivoEnv) throws IOException {
         Map<String, String> mapa = new HashMap<>();
         BufferedReader br = new BufferedReader(new FileReader(archivoEnv));
         String linea;
         while ((linea = br.readLine()) != null) {
+            //Si la linea contiene "=", pondrá en el mapa la variable y valor
             if (linea.contains("=")) {
-                String[] variables = linea.split("=");
-                mapa.put(variables[0].trim(), variables[1].trim());
+                //Se guarda la variable y el valor
+                String[] variableValor = linea.split("=");
+                //variableValor[0] = variable, variableValor[1] = valor
+                mapa.put(variableValor[0].trim(), variableValor[1].trim());
                 contadorVariables++;
             }
         }
@@ -39,13 +32,15 @@ public class CargaEnv {
         return mapa;
     }
 
+    //Obtiene los datos del mapa
     public static String getEnv(String clave, String valorPorDefecto){
         return env.getOrDefault(clave, valorPorDefecto);
     }
 
     public static void main(String[] args) {
+        //El try debería recibir los throws IOException de cargaEnv
         try {
-            env = cargarEnv("src/accesoFicherosIO/resources/env/.env");
+            env = cargarEnv("src/p02accesoFicherosIO/resources/env/.env");
             System.out.println("Base de datos: " + env.get("DB_HOST") + ":" + env.get("DB_PORT"));
         }catch (IOException e){
             System.out.println("Error: " + e.getMessage());

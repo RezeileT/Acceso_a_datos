@@ -76,6 +76,7 @@ public class MergeFiltrado {
 
     public static void main(String[] args) {
         int num = 0;
+        //El try debería recibir los throws IOException desde combinarArchivos
         try {
             num = combinarArchivos(archivoEntrada, archivoSalida, FILTRO);
         } catch (IOException e) {
