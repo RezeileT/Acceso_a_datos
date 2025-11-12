@@ -1,4 +1,4 @@
-package p01ejerciciosFicheros;
+package p01ejerciciosFicheros.ejercicios789;
 
 import java.io.File;
 import java.net.URI;
@@ -27,28 +27,32 @@ public class ExploradorCarpetas {
         int contadorElementos = 0;
         int contadorSubElementos;
 
-        if (file.exists() && file.isDirectory()) {
-            File[] elementos = file.listFiles();
-            if (elementos != null) {
-                for (File elemento : elementos) {
-                    if (elemento.isDirectory()) {
-                        File[] subelementos = elemento.listFiles();
-                        contadorSubElementos = 0;
-                        for (File subelemento : subelementos) {
-                            contadorSubElementos++;
-                        }
-                        System.out.println(elemento.getName() + " - El directorio tiene "  + contadorSubElementos + " elementos");
-                    } else if (elemento.isFile()) {
-                        System.out.println(elemento.getName() + " - Archivo: " +elemento.length() + " bytes");
-                    }
-                    contadorElementos++;
-                }
-            } else {
-                System.out.println("La carpeta está vacía o no se puede acceder.");
-            }
-        } else {
+        if (!file.exists() || !file.isDirectory()) {
             System.out.println("La ruta introducida no existe o no es una carpeta.");
+            return;
         }
+
+        File[] elementos = file.listFiles();
+        if (elementos == null) {
+            System.out.println("La carpeta está vacía o no se puede acceder.");
+            return;
+        }
+
+        for (File elemento : elementos) {
+            if (elemento.isDirectory()) {
+                File[] subelementos = elemento.listFiles();
+                contadorSubElementos = 0;
+                for (File subelemento : subelementos) {
+                    contadorSubElementos++;
+                }
+                System.out.println(elemento.getName() + " - El directorio tiene " + contadorSubElementos + " elementos");
+            } else if (elemento.isFile()) {
+                System.out.println(elemento.getName() + " - Archivo: " + elemento.length() + " bytes");
+            }
+            contadorElementos++;
+        }
+
+
         System.out.println("Total de elementos encontrados : " + contadorElementos);
     }
 

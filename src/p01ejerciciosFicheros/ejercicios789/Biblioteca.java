@@ -1,4 +1,4 @@
-package p01ejerciciosFicheros;
+package p01ejerciciosFicheros.ejercicios789;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,10 +20,10 @@ public class Biblioteca {
         System.out.print("Ingrese el nombre del de la categoria: ");
         categoria = sc.nextLine();
 
-        String directorio = "C:\\Users\\AlumnoAfternoon\\Documents\\Biblioteca\\" + categoria;
+        String directorio = "src/p01ejerciciosFicheros/resources/biblioteca" + File.separator + categoria;
         File directorioPadre = new File(directorio);
 
-        String archivo = directorio + "\\" + nombre; // nombre puede estar vacío aquí
+        String archivo = directorio + File.separator + nombre; // nombre puede estar vacío aquí
         File archivoHijo = new File(archivo);
 
         boolean fin = false;
@@ -51,15 +51,15 @@ public class Biblioteca {
     }
 
     public static void verificarLibro() {
-        System.out.println("Introduce la categoria del libro: ");
+        System.out.print("Introduce la categoria del libro: ");
         categoria = sc.nextLine();
-        System.out.println("Introduce el nombre del libro: ");
+        System.out.print("Introduce el nombre del libro: ");
         nombre = sc.nextLine();
 
-        String directorio = "C:\\Users\\AlumnoAfternoon\\Documents\\Biblioteca\\" + categoria;
+        String directorio = "src/p01ejerciciosFicheros/resources/biblioteca"+ File.separator + categoria;
         File directorioPadre = new File(directorio);
 
-        String archivo = directorio + "\\" + nombre;
+        String archivo = directorio + File.separator + nombre;
         File archivoHijo = new File(archivo);
 
         if (directorioPadre.exists() && archivoHijo.exists()) {
