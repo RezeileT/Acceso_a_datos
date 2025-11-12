@@ -5,13 +5,16 @@ import java.net.URI;
 import java.util.Scanner;
 
 public class ExploradorCarpetas {
+    //Recibe input desde la consola
     private static Scanner sc = new Scanner(System.in);
+    //Donde se guardara la categoria
     private static String carpeta;
 
     public static void main(String[] args) {
         explorarCarpeta();
     }
 
+    //Metodo que te pide la ruta de la carpeta
     public static void explorarCarpeta() {
         System.out.println("***Explorador de carpetas***");
         System.out.print("Introduce la carpeta que quieras explorar: ");
@@ -22,6 +25,7 @@ public class ExploradorCarpetas {
         convertirAURI(carpeta);
     }
 
+    //Ve y muestra los elementos de una carpeta
     public static void analizarElemento(String carpeta) {
         File file = new File(carpeta);
         int contadorElementos = 0;
@@ -56,6 +60,7 @@ public class ExploradorCarpetas {
         System.out.println("Total de elementos encontrados : " + contadorElementos);
     }
 
+    //Convierte en URI la ruta recibida
     public static void convertirAURI(String carpeta) {
         System.out.println("Conversión a URI");
         File carpetaF = new File(carpeta);

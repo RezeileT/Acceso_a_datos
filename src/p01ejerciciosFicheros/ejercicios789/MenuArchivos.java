@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class MenuArchivos {
+    //Recibe input desde la consola
     private static Scanner sc = new Scanner(System.in);
     private static String input = null;
     private static File file = null;

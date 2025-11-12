@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Biblioteca {
+    //Recibe input desde la consola
     private static Scanner sc = new Scanner(System.in);
-
+    //Donde se guardara la categoria
     private static String categoria = "";
+    //nombre por defecto
     private static String nombre = "catalogo.txt";
 
     public static void main(String[] args) {
@@ -15,6 +17,7 @@ public class Biblioteca {
         verificarLibro();
     }
 
+    //Metodo para crear la carpeta y un archivo por defecto
     public static void organizarBiblioteca() {
         System.out.println("***ORGANIZADOR DE BIBLIOTECA***");
         System.out.print("Ingrese el nombre del de la categoria: ");
@@ -50,6 +53,7 @@ public class Biblioteca {
         } while (!fin);
     }
 
+    //Verifica si existe un libro en específico
     public static void verificarLibro() {
         System.out.print("Introduce la categoria del libro: ");
         categoria = sc.nextLine();
