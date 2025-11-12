@@ -39,39 +39,6 @@ public class EstadisticasTexto {
                 "\nPalabra más larga: " + palabraMasLarga;
     }
 
-    //Generamos getters y setter par acceder a los datos (aunque no los utilizemos)
-    public int getNumeroLineas() {
-        return numeroLineas;
-    }
-
-    public void setNumeroLineas(int numeroLineas) {
-        this.numeroLineas = numeroLineas;
-    }
-
-    public int getNumeroPalabras() {
-        return numeroPalabras;
-    }
-
-    public void setNumeroPalabras(int numeroPalabras) {
-        this.numeroPalabras = numeroPalabras;
-    }
-
-    public int getNumeroCaracteres() {
-        return numeroCaracteres;
-    }
-
-    public void setNumeroCaracteres(int numeroCaracteres) {
-        this.numeroCaracteres = numeroCaracteres;
-    }
-
-    public String getPalabraMasLarga() {
-        return palabraMasLarga;
-    }
-
-    public void setPalabraMasLarga(String palabraMasLarga) {
-        this.palabraMasLarga = palabraMasLarga;
-    }
-
     //Función para leer el archivo y guardar sus estadisticas
     public static EstadisticasTexto analizarArchivo(String ruta) throws IOException {
 
