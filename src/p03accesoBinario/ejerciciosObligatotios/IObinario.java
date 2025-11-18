@@ -104,15 +104,15 @@ public class IObinario {
 
 
         try {
-            escribirProducto("src/accesoBinario/resources/inventario.dat", p1);
-            agregarProducto("src/accesoBinario/resources/inventario.dat", p2);
+            escribirProducto("src/p03accesoBinario/resources/inventario.dat", p1);
+            agregarProducto("src/p03accesoBinario/resources/inventario.dat", p2);
 
         }catch (IOException e){
             System.err.println("Error" + e.getMessage());
         }
 
         try{
-            List<Producto> productos = leerProductos("src/accesoBinario/resources/inventario.dat");
+            List<Producto> productos = leerProductos("src/p03accesoBinario/resources/inventario.dat");
             for (Producto producto : productos) {
                 System.out.println(producto);
             }

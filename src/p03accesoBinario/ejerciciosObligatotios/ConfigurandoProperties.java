@@ -31,7 +31,7 @@ public class ConfigurandoProperties {
     }
 
     public static void main(String[] args) {
-        String ruta = "src/accesoBinario/resources";
+        String ruta = "src/p03accesoBinario/resources";
         try {
             Properties config = cargarConfiguracion(ruta + File.separator + "app.properties");
             String dbHost = getString(config, "db.host", "localhost");
