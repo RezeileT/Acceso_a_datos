@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class PrimitivosEjemplo {
     public static void main(String[] args) {
-        String archivo = "src/accesoBinario/resources/datosPrimitivos.bin";
+        String archivo = "src/p03accesoBinario/resources/datosPrimitivos.bin";
 
         // Escritura de datos primitivos
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(archivo))) {
