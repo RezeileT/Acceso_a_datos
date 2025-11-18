@@ -22,7 +22,16 @@ public class JDBCBinario {
         }
     }
 
-    public static int exportarProductos(Connection conn, String archivo) throws SQLException, IOException {
+    public static void crearTabla(Connection conn) throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS productos (" +
+                "id INT PRIMARY KEY AUTO_INCREMENT, " +
+                "nombre VARCHAR(100) NOT NULL)";
+        conn.createStatement().executeUpdate(sql);
+        System.out.println("Tabla productos creada");
+    }
+
+
+        public static int exportarProductos(Connection conn, String archivo) throws SQLException, IOException {
         productos = new ArrayList<>();
         sentencia = conn.createStatement();
         String sql = "SELECT id, nombre FROM productos";
@@ -80,15 +89,19 @@ public class JDBCBinario {
         String url = "jdbc:mysql://localhost:3306/mi_base_datos";
         String usuario = "root";
         String password = "mysql";
-        String ruta = "src/accesoBinario/resources";
+        String ruta = "src/p03accesoBinario/resources";
         String archivo = "backup_productos.dat";
 
         try {
             conexion = DriverManager.getConnection(url, usuario, password);
+            crearTabla(conexion);
             int exportados = exportarProductos(conexion, ruta + File.separator + archivo);
             System.out.println("Productos exportados: " + exportados);
             sentencia = conexion.createStatement();
-            //sentencia.executeUpdate("DELETE FROM productos WHERE id=1");
+            //Borramos los datos para poder insertar los datos guardados en el backup, ya que el ID es único y no permite duplicados
+            sentencia.executeUpdate("DELETE FROM productos WHERE id=1");
+            sentencia.executeUpdate("DELETE FROM productos WHERE id=2");
+            sentencia.executeUpdate("DELETE FROM productos WHERE id=3");
             int importados = importarProductos(conexion, ruta + File.separator + archivo);
             System.out.println("Productos importados: " + importados);
         }catch (Exception e){
