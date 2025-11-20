@@ -6,20 +6,18 @@ import java.util.Properties;
 
 public class PropertiesBBDD {
     //Sentencias:
-    private static final String INSERT = "INSERT INTO configuracion (nombre, valor) VALUES (?, ?)";
+    private static final String INSERT = "INSERT INTO configuracion (nombre, valor) VALUES (?, ?) ON DUPLICATE KEY UPDATE valor = VALUES(valor)";
     private static final String UPDATE = "UPDATE configuracion SET valor = ? WHERE nombre = ?";
     private static final String SELECT = "SELECT nombre, valor FROM configuracion";
 
     public static void crearTabla(Connection conn) throws SQLException {
         conn.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS configuracion (" +
-                "id int PRIMARY KEY AUTO_INCREMENT," +
-                "nombre varchar(100) NOT NULL," +
+                "nombre varchar(100) NOT NULL PRIMARY KEY," +
                 "valor varchar(100) NOT NULL)");
         System.out.println("Tabla configuracion creada");
     }
 
     public static int migrarPropertiesABD(String archivo, Connection conn) throws IOException,SQLException {
-        int numeroPropiedades = 0;
         Properties config = new Properties();
         config.load(new FileInputStream(archivo));
         for (String key : config.stringPropertyNames()) {
@@ -29,10 +27,9 @@ public class PropertiesBBDD {
             PreparedStatement ps = conn.prepareStatement(INSERT);
             ps.setString(1, key);
             ps.setString(2, config.getProperty(key));
-            numeroPropiedades += ps.executeUpdate();
         }
 
-        return numeroPropiedades;
+        return config.size();
     }
     public static int exportarBDaProperties(Connection conn, String archivo) throws SQLException, IOException {
         int numeroPropiedades = 0;
